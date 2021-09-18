@@ -1,0 +1,75 @@
+.ModalWindow {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 200;
+
+  font-family: 'Montserrat';
+  font-style: normal;
+  line-height: 180%;
+
+  .ModalWindow__container {
+    position: fixed;
+    top: 50px;
+    bottom: 50px;
+    left: 50px;
+    right: 50px;
+    background-color: #ffffff;
+  }
+
+  .ModalWindow__header {
+    height: 10%;
+    padding: 20px;
+  }
+
+  .ModalWindow__headerTitle {
+    font-size: 24px;
+    font-weight: 600;
+    padding: 20px;
+  }
+
+  .ModalWindow__body {
+    padding: 30px;
+    padding-bottom: 0;
+    height: 90%;
+    overflow-y: scroll;
+
+    /* полоса прокрутки (скроллбар) */
+    &::-webkit-scrollbar {
+      width: 5px; /* ширина для вертикального скролла */
+      height: 5px; /* высота для горизонтального скролла */
+    }
+
+    /* ползунок скроллбара */
+    &::-webkit-scrollbar-thumb {
+      background-color: #0068a5;
+    }
+  }
+
+  .ModalWindow__close {
+    padding: 20px;
+    cursor: pointer;
+
+    svg {
+      transition: all ease-in-out 0.2s;
+    }
+
+    &:hover {
+      svg {
+        fill: #0068a5;
+      }
+    }
+  }
+
+  @media screen and(max-width:576px) {
+    .ModalWindow__container {
+      top: 20px;
+      bottom: 20px;
+      left: 10px;
+      right: 10px;
+    }
+  }
+}
