@@ -1,5 +1,5 @@
 {
-  "name": "defaultRTFunc",
+  "name": "animalShelter",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -22,6 +22,7 @@
     "animate.css": "^4.1.1",
     "axios": "^0.21.1",
     "bootstrap": "^4.5.3",
+    "firebase": "^9.0.2",
     "js-sha256": "^0.9.0",
     "node-sass": "^4.14.1",
     "react": "^17.0.1",

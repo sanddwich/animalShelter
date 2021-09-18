@@ -1,3 +1,4 @@
+import { FirebaseApp } from "@firebase/app";
 import { MarketUser } from "./AdditionalInterfaces/MarketUser";
 import Pagination from "./AdditionalInterfaces/Pagination";
 import Product from "./AdditionalInterfaces/Product";
@@ -11,6 +12,7 @@ export interface AppState {
   products: Product[]
   productCategories: ProductCategory[]
   pagination: Pagination
+  firebaseApp: FirebaseApp
 }
 
 export interface ToastState {

@@ -1,3 +1,21 @@
 .MainHeader {
-  
+  background-color: #333;
+  margin-bottom: 20px;
+  font-family: 'Roboto';
+  font-size: 20px;
+  box-shadow: 0 2px 10px 0 #777777;
+  font-weight: 400;
+
+  .MainHeader__menuEl {
+    margin: 20px;
+
+    a {
+      color: #ffffff;
+      text-decoration: none;
+
+      &:hover {
+        color: #92b7d3;
+      }
+    }
+  }
 }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { createContext } from 'react'
 import ReactDOM from 'react-dom'
 import './index.scss'
 import App from './App'
@@ -6,6 +6,14 @@ import reportWebVitals from './reportWebVitals'
 import { Provider } from 'react-redux'
 import store from './Redux'
 import { BrowserRouter } from 'react-router-dom'
+
+// import firebase from 'firebase/app'
+// import auth from 'firebase/auth'
+// import firestore from 'firebase/firestore'
+
+// firebase.initializeApp(Config.firebaseConfig)
+
+const Context = createContext(null)
 
 ReactDOM.render(
   <Provider store={store}>

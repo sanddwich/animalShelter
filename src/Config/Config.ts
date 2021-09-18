@@ -1,3 +1,4 @@
+import FirebaseConfig from "../Redux/interfaces/AdditionalInterfaces/FirebaseConfig";
 import ProductOperation from "../Redux/interfaces/AdditionalInterfaces/ProductOperation";
 import UploadFiles from "../Redux/interfaces/AdditionalInterfaces/UploadFiles";
 
@@ -9,9 +10,19 @@ interface ConfigInterface {
   productOperations: ProductOperation[]
   messageTimout: number
   uploadFilesCount: number
+  firebaseConfig: FirebaseConfig
 }
 
 export const Config: ConfigInterface = {
+  firebaseConfig: {
+    apiKey: "AIzaSyD3l5HK1Vj1a3FudtnAKCJstwSfo48sBcc",
+    authDomain: "animalshelter-670e4.firebaseapp.com",
+    databaseURL: "https://animalshelter-670e4-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "animalshelter-670e4",
+    storageBucket: "animalshelter-670e4.appspot.com",
+    messagingSenderId: "624129915349",
+    appId: "1:624129915349:web:7e6300381d593c968ae55c"
+  },
   backConnectData: {
     backendURL: 'http://laravel:8000',
   },

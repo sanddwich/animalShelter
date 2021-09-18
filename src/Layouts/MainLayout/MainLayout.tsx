@@ -5,6 +5,7 @@ import MainBody from './MainBody/MainBody'
 import MainFooter from './MainFooter/MainFooter'
 import MainHeader from './MainHeader/MainHeader'
 import './MainLayout.scss'
+import AnimalTypes from './Pages/AnimalTypes/AnimalTypes'
 import Main from './Pages/Main/Main'
 import Second from './Pages/Second/Second'
 
@@ -20,7 +21,7 @@ class MainLayout extends React.Component<MainLayoutProps, MainLayoutState> {
         <MainBody>
           <Switch>
             <Route path="/" exact component={Main} />
-            <Route path="/second" exact component={Second} />
+            <Route path="/types" exact component={AnimalTypes} />
 
             <Redirect to="/" />
           </Switch>

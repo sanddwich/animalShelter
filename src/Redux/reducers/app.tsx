@@ -9,8 +9,13 @@ import {
 } from '../constants/ActionTypes'
 import { AppActionType } from '../interfaces/app'
 import { AppState } from '../interfaces/interfaces'
+import { Config } from '../../Config/Config'
+
+//Firebase to Redux
+import {initializeApp} from 'firebase/app'
 
 const initialState: AppState = {
+  firebaseApp: initializeApp(Config.firebaseConfig),
   error: '',
   loading: false,
   tariff: '',
