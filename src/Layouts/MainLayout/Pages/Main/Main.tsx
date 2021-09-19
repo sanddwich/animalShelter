@@ -1,37 +1,54 @@
-import React, { useEffect, useState } from 'react'
+import React, { EffectCallback, useEffect, useState } from 'react'
 import { Container } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { RootState } from '../../../../Redux'
 import { AppState } from '../../../../Redux/interfaces/interfaces'
 import './Main.scss'
 
-import { getFirestore, collection, getDocs } from 'firebase/firestore/lite'
-import { Config } from '../../../../Config/Config'
 import FirebaseService from '../../../../Services/FirebaseService'
+import AnimalType from '../../../../Redux/interfaces/AdditionalInterfaces/AnimalType'
+import Animal from '../../../../Redux/interfaces/AdditionalInterfaces/Animal'
+import AnimalCard from '../../../../SharedComponents/AnimalCard/AnimalCard'
 
 interface MainProps {
   app: AppState
 }
 
+const firebaseService = new FirebaseService()
+
 const Main = (props: MainProps) => {
-  const [loading, setLoading] = useState<boolean>(false)
-  
-  const getFirebase = async () => {
-    const firebaseService = new FirebaseService()
-    // const animals = await firebaseService.getAnimals(props.app.firebaseApp)
-    const animal = await firebaseService.getAnimal(props.app.firebaseApp, '2tklZfQGIZbQN8SyMGPJ')
-    // const updatedAnimal = await firebaseService.setAnimal(props.app.firebaseApp, '2tklZfQGIZbQN8SyMGPJ', {...animal, name: "Бобик"})
-    // console.log(await firebaseService.addAnimal(props.app.firebaseApp, {...animal, name: "Новое животное"}))
-    // console.log(await firebaseService.delAnimal(props.app.firebaseApp, 'ThPAAk3AXNzNdO7TZI0p'))
-  }
+  const [loading, setLoading] = useState<boolean>(true)
+  const [animalTypes, setAnimalTypes] = useState<Array<AnimalType>>([])  
+  const [animals, setAnimals] = useState<Array<Animal>>([])
 
   useEffect(() => {
-    getFirebase()
+    getFirebaseData()
   }, [])
+
+  const getAnimalTypes = async ():Promise<any> => {    
+    const animalTypes = await firebaseService.getAnimalTypes(props.app.firebaseApp)
+    setAnimalTypes(animalTypes)
+  }
+
+  const getAnimals = async ():Promise<any> => {
+    const animals = await firebaseService.getAnimals(props.app.firebaseApp)
+    setAnimals(animals)
+  }
+
+  const getFirebaseData = async ():Promise<any> => {
+    await getAnimalTypes()    
+    await getAnimals()
+    setLoading(true)
+  }
 
   return (
     <Container fluid className="Main">
       <h1>Приют домашних животных:</h1>
+      <h3>Животные:</h3>
+      {animals.map((animal, index) => {
+        return <AnimalCard key={index} animal={animal} cardNumber={index} />
+      })}
+      <p>Типы животных: {JSON.stringify(animalTypes)}</p>
     </Container>
   )
 }

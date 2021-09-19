@@ -1,6 +1,7 @@
 import { FirebaseApp } from '@firebase/app'
 import { getFirestore, collection, getDocs, getDoc, doc, updateDoc, addDoc, deleteDoc } from 'firebase/firestore/lite'
 import Animal from '../Redux/interfaces/AdditionalInterfaces/Animal'
+import AnimalType from '../Redux/interfaces/AdditionalInterfaces/AnimalType'
 
 class FirebaseService {
   async getAnimals(firebaseApp: FirebaseApp): Promise<any> {
@@ -23,6 +24,21 @@ class FirebaseService {
     return animals
   }
 
+  async getAnimalTypes(firebaseApp: FirebaseApp): Promise<Array<AnimalType>> {
+    const dbName: string = 'animalType'
+    const animalTypesCollection = collection(getFirestore(firebaseApp), dbName)
+    const animalTypesSnapshot = await getDocs(animalTypesCollection)
+
+    const animalTypes: AnimalType[] = []
+    animalTypesSnapshot.forEach((animalType) => {
+      animalTypes.push({
+        name: animalType.get('name'),
+      })
+    })
+
+    return animalTypes
+  }
+
   async getAnimal(firebaseApp: FirebaseApp, animalID: string): Promise<any> {
     const dbName: string = 'animals'
     const docRef = doc(getFirestore(firebaseApp), dbName, animalID)
@@ -38,6 +54,17 @@ class FirebaseService {
 
     return animal
   }
+  
+  async getAnimalType(firebaseApp: FirebaseApp, animaTypeID: string): Promise<any> {
+    const dbName: string = 'animalType'
+    const docRef = doc(getFirestore(firebaseApp), dbName, animaTypeID)
+    const docSnapshot = await getDoc(docRef)
+    const animaType: AnimalType = {
+      name: docSnapshot.get('name'),
+    }
+
+    return animaType
+  }
 
   async setAnimal(firebaseApp: FirebaseApp, animalID: string, animal: Animal): Promise<any> {
     const dbName: string = 'animals'
@@ -47,9 +74,23 @@ class FirebaseService {
     return await this.getAnimal(firebaseApp, animalID)
   }
 
+  async setAnimalType(firebaseApp: FirebaseApp, animaTypeID: string, animaType: AnimalType): Promise<any> {
+    const dbName: string = 'animalType'
+    const docRef = doc(getFirestore(firebaseApp), dbName, animaTypeID)
+    await updateDoc(docRef, {...animaType})
+
+    return await this.getAnimal(firebaseApp, animaTypeID)
+  }
+
   async addAnimal(firebaseApp: FirebaseApp, animal: Animal): Promise<any> {    
     const dbName: string = 'animals'
     const docRef = await addDoc(collection(getFirestore(firebaseApp), dbName), animal)
+    return await this.getAnimal(firebaseApp, docRef.id)
+  }
+  
+  async addAnimalType(firebaseApp: FirebaseApp, animalType: AnimalType): Promise<any> {    
+    const dbName: string = 'animalType'
+    const docRef = await addDoc(collection(getFirestore(firebaseApp), dbName), animalType)
     return await this.getAnimal(firebaseApp, docRef.id)
   }
 
@@ -61,6 +102,16 @@ class FirebaseService {
     await deleteDoc(docRef)
 
     return delAnimal
+  }
+  
+  async delAnimalType(firebaseApp: FirebaseApp, animalTypeID: string): Promise<any> {
+    const dbName: string = 'animalType'
+    const docRef = doc(getFirestore(firebaseApp), dbName, animalTypeID)
+    const delAnimalType = await this.getAnimal(firebaseApp, animalTypeID)
+
+    await deleteDoc(docRef)
+
+    return delAnimalType
   }
 }
 

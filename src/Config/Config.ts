@@ -11,6 +11,10 @@ interface ConfigInterface {
   messageTimout: number
   uploadFilesCount: number
   firebaseConfig: FirebaseConfig
+  tableFields: {
+    animals: Map<string, string>
+    animalTypes: Map<string, string>
+  }
 }
 
 export const Config: ConfigInterface = {
@@ -22,6 +26,19 @@ export const Config: ConfigInterface = {
     storageBucket: "animalshelter-670e4.appspot.com",
     messagingSenderId: "624129915349",
     appId: "1:624129915349:web:7e6300381d593c968ae55c"
+  },
+  tableFields: {
+    animals: new Map([
+      ['age', 'возраст'],      
+      ['color', 'цвет'],      
+      ['name', 'имя'],      
+      ['sex', 'пол'],      
+      ['type', 'тип животного'],      
+      ['weight', 'вес'],
+    ]),
+    animalTypes: new Map([
+      ['name', 'Тип животного'],
+    ])
   },
   backConnectData: {
     backendURL: 'http://laravel:8000',
