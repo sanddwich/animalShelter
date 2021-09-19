@@ -1,3 +1,13 @@
 .AnimalCardElement {
-  
+  padding: 10px;
+  padding-left: 30px;
+  padding-right: 30px;
+  box-shadow: 0 0 3px 0 rgb(126, 126, 126);
+  margin-right: 10px;
+  margin-bottom: 10px;
+  .AnimalCardElement__title {
+    font-family: 'Raleway';
+    font-weight: 600;
+    padding-right: 5px;
+  }
 }

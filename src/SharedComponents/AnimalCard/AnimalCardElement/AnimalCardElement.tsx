@@ -24,7 +24,7 @@ const AnimalCardElement = (props: AnimalCardElementProps) => {
 
 
   return (
-    <Container fluid className="AnimalCardElement p-0 d-flex justify-content-start align-items-center">
+    <Container fluid className="AnimalCardElement d-flex justify-content-start align-items-center">
       <div className="AnimalCardElement__title">{Config.tableFields.animals.get(props.field)}</div>
       <div className="AnimalCardElement__data">{fieldData}</div>
     </Container>
