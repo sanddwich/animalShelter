@@ -11,9 +11,9 @@ interface AnimalCardElementProps {
 }
 
 const AnimalCardElement = (props: AnimalCardElementProps) => {
-  const [fieldData, setFieldData] = useState<string>(() => {    
+  const [fieldData, setFieldData] = useState<string>(() => {
     let returnData = ''
-    Object.keys(props.animal).forEach(key => {
+    Object.keys(props.animal).forEach((key) => {
       const objKey = key as keyof typeof props.animal
       if (props.field === key) {
         returnData = props.animal[objKey].toString()
@@ -22,12 +22,11 @@ const AnimalCardElement = (props: AnimalCardElementProps) => {
     return returnData
   })
 
-
   return (
-    <Container fluid className="AnimalCardElement d-flex justify-content-start align-items-center">
+    <div className="AnimalCardElement d-block">
       <div className="AnimalCardElement__title">{Config.tableFields.animals.get(props.field)}</div>
       <div className="AnimalCardElement__data">{fieldData}</div>
-    </Container>
+    </div>
   )
 }
 

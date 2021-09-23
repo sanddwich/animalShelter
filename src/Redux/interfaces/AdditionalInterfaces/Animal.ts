@@ -1,4 +1,5 @@
 export default interface Animal {
+  id: string
   age: number
   color: string
   name: string

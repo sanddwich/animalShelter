@@ -11,7 +11,9 @@ class FirebaseService {
 
     const animals: Animal[] = []
     animalsSnapshot.forEach((animal) => {
+      // console.log(animal)
       animals.push({
+        id: animal.id,
         age: animal.get('age'),
         color: animal.get('color'),
         name: animal.get('name'),
@@ -32,6 +34,7 @@ class FirebaseService {
     const animalTypes: AnimalType[] = []
     animalTypesSnapshot.forEach((animalType) => {
       animalTypes.push({
+        id: animalType.id,
         name: animalType.get('name'),
       })
     })
@@ -44,6 +47,7 @@ class FirebaseService {
     const docRef = doc(getFirestore(firebaseApp), dbName, animalID)
     const docSnapshot = await getDoc(docRef)
     const animal: Animal = {
+      id: docSnapshot.id,
       age: docSnapshot.get('age'),
       color: docSnapshot.get('color'),
       name: docSnapshot.get('name'),
@@ -60,6 +64,7 @@ class FirebaseService {
     const docRef = doc(getFirestore(firebaseApp), dbName, animaTypeID)
     const docSnapshot = await getDoc(docRef)
     const animaType: AnimalType = {
+      id: docSnapshot.id,
       name: docSnapshot.get('name'),
     }
 

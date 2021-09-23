@@ -1,6 +1,47 @@
 .AnimalCard {
+  padding: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 0 3px 0 rgb(126, 126, 126);
 
-  .AnimalCard__animalInfoCont {
-    // flex-wrap: wrap;
+  .AnimalCard__num {
+    padding: 0;
+    padding-right: 10px;
+  }
+
+  .AnimalCard__numCont {
+    height: 50px;
+    padding: 5px;
+    border-radius: 5px;
+
+    background-color: #333;
+    color: #ffffff;
+    font-family: 'Raleway';
+    font-weight: 600;
+    font-size: 16px;
+  }
+
+  .hvr-sweep-to-right:before {
+    background: #b62e3b;
+  }
+
+  .AnimalCard__cardActions {
+    justify-content: start !important;
+    color: #ffffff;
+  }
+
+  .IconButton__title {
+    font-size: 16px;
+
+    @media screen and(max-width: 576px) {
+      font-size: 16px;
+      font-weight: 600 !important;
+    }
+  }
+
+  .IconButton__icon {
+    padding: 5px;
+    img {
+      width: 25px;
+    }
   }
 }

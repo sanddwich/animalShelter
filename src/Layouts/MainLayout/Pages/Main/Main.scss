@@ -1,3 +1,29 @@
 .Main {
-  
+  .Main__addButton {
+    padding-top: 10px;
+    padding-bottom: 30px;
+
+    .IconButton {
+      .IconButton__icon {
+        padding: 5px;
+        img {
+          width: 25px;
+        }
+      }
+    }
+
+    .IconButton__title {
+      font-size: 16px;
+      color: #ffffff;
+
+      @media screen and(max-width: 576px) {
+        font-size: 16px;
+        font-weight: 600 !important;
+      }
+    }
+
+    .hvr-sweep-to-right:before {
+      background: #146f44;
+    }
+  }
 }

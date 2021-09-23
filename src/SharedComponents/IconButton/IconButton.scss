@@ -1,0 +1,31 @@
+.IconButton {
+  overflow: hidden;
+  padding: 20px;
+  cursor: pointer;
+
+  .IconButton__icon {
+    padding: 20px;
+  }
+
+  .IconButton__title {
+    padding: 20px;
+
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 145%;
+    /* or 26px */
+
+    text-align: center;
+
+    @media screen and(max-width: 576px) {
+      font-size: 14px;
+      font-weight: 400;
+    }
+  }
+}
+
+.hvr-sweep-to-right:before {
+  background: #5b68df;
+}
