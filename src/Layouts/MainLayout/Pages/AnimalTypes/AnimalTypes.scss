@@ -1,3 +1,55 @@
 .AnimalTypes {
-  
+  .hvr-sweep-to-right:before {
+    background: #b62e3b;
+  }
+  .IconButton__title {
+    font-size: 16px;
+    color: #ffffff;
+    font-family: 'Raleway';
+    font-weight: 600;
+    font-size: 16px;
+
+    @media screen and(max-width: 576px) {
+      font-size: 16px;
+      font-weight: 600 !important;
+    }
+  }
+
+  .IconButton__icon {
+    padding: 5px !important;
+    img {
+      width: 25px;
+    }
+  }
+
+  .AnimalTypes__Row {
+    padding-bottom: 10px;
+  }
+
+  .AnimalTypes__name {
+    font-weight: 600;
+    border: #333 1px dashed;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .AnimalTypes__form {
+    width: 500px;
+    padding: 20px;
+    margin-top: 30px;
+    box-shadow: 0 0 3px 0 #333;
+
+    .form-label {
+      font-weight: 600;
+    }
+
+    @media screen and(max-width: 576px) {
+      width: 300px;
+    }
+  }
 }

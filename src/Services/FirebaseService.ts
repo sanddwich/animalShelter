@@ -1,6 +1,7 @@
 import { FirebaseApp } from '@firebase/app'
 import { getFirestore, collection, getDocs, getDoc, doc, updateDoc, addDoc, deleteDoc } from 'firebase/firestore/lite'
 import Animal from '../Redux/interfaces/AdditionalInterfaces/Animal'
+import AnimalToFB from '../Redux/interfaces/AdditionalInterfaces/AnimalToFB'
 import AnimalType from '../Redux/interfaces/AdditionalInterfaces/AnimalType'
 
 class FirebaseService {
@@ -71,7 +72,7 @@ class FirebaseService {
     return animaType
   }
 
-  async setAnimal(firebaseApp: FirebaseApp, animalID: string, animal: Animal): Promise<any> {
+  async setAnimal(firebaseApp: FirebaseApp, animalID: string, animal: AnimalToFB): Promise<any> {
     const dbName: string = 'animals'
     const docRef = doc(getFirestore(firebaseApp), dbName, animalID)
     await updateDoc(docRef, {...animal})
@@ -87,7 +88,7 @@ class FirebaseService {
     return await this.getAnimal(firebaseApp, animaTypeID)
   }
 
-  async addAnimal(firebaseApp: FirebaseApp, animal: Animal): Promise<any> {    
+  async addAnimal(firebaseApp: FirebaseApp, animal: AnimalToFB): Promise<any> {    
     const dbName: string = 'animals'
     const docRef = await addDoc(collection(getFirestore(firebaseApp), dbName), animal)
     return await this.getAnimal(firebaseApp, docRef.id)
@@ -96,7 +97,7 @@ class FirebaseService {
   async addAnimalType(firebaseApp: FirebaseApp, animalType: AnimalType): Promise<any> {    
     const dbName: string = 'animalType'
     const docRef = await addDoc(collection(getFirestore(firebaseApp), dbName), animalType)
-    return await this.getAnimal(firebaseApp, docRef.id)
+    return await this.getAnimalType(firebaseApp, docRef.id)
   }
 
   async delAnimal(firebaseApp: FirebaseApp, animalID: string): Promise<any> {

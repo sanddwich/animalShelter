@@ -20,8 +20,16 @@
     font-size: 16px;
   }
 
-  .hvr-sweep-to-right:before {
-    background: #b62e3b;
+  .AnimalCard__remove {
+    .hvr-sweep-to-right:before {
+      background: #b62e3b;
+    }
+  }
+
+  .AnimalCard__redact {
+    .hvr-sweep-to-right:before {
+      background: #2c7bb8;
+    }
   }
 
   .AnimalCard__cardActions {
@@ -42,6 +50,21 @@
     padding: 5px;
     img {
       width: 25px;
+    }
+  }
+
+  .AnimalCardElement {
+    padding: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    border: 1px #333 dashed;
+
+    .AnimalCardElement__title {
+      font-family: 'Raleway';
+      font-weight: 600;
+      padding-right: 5px;
     }
   }
 }

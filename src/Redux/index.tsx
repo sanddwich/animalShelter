@@ -6,5 +6,6 @@ import rootReducer from './reducers'
 export type RootState = ReturnType<typeof rootReducer>
 
 let store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)))
+// let store = createStore(rootReducer, applyMiddleware(thunk))
 
 export default store

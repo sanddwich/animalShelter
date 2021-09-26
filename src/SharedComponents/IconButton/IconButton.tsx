@@ -2,6 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import { Container } from 'react-bootstrap'
 import { propTypes } from 'react-bootstrap/esm/Image'
+import Animal from '../../Redux/interfaces/AdditionalInterfaces/Animal'
 import './IconButton.scss'
 
 interface IconButtonProps {

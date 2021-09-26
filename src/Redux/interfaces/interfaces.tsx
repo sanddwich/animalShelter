@@ -1,4 +1,6 @@
 import { FirebaseApp } from "@firebase/app";
+import Animal from "./AdditionalInterfaces/Animal";
+import AnimalType from "./AdditionalInterfaces/AnimalType";
 import { MarketUser } from "./AdditionalInterfaces/MarketUser";
 import Pagination from "./AdditionalInterfaces/Pagination";
 import Product from "./AdditionalInterfaces/Product";
@@ -13,6 +15,8 @@ export interface AppState {
   productCategories: ProductCategory[]
   pagination: Pagination
   firebaseApp: FirebaseApp
+  animals: Animal[]
+  animalTypes: AnimalType[]
 }
 
 export interface ToastState {

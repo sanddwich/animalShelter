@@ -12,18 +12,21 @@ import AnimalCard from '../../../../SharedComponents/AnimalCard/AnimalCard'
 import IconButton from '../../../../SharedComponents/IconButton/IconButton'
 import ModalWindow from '../../../../SharedComponents/ModalWindow/ModalWindow'
 import AnimalForm from '../../../../SharedComponents/AnimalForm/AnimalForm'
+import { setAnimalTypes, setAnimals } from '../../../../Redux/actions/app'
 
 interface MainProps {
   app: AppState
+  setAnimals: (animals: Animal[]) => void
+  setAnimalTypes: (animals: AnimalType[]) => void
 }
 
 const firebaseService = new FirebaseService()
 
 const Main = (props: MainProps) => {
   const [loading, setLoading] = useState<boolean>(true)
-  const [animalTypes, setAnimalTypes] = useState<Array<AnimalType>>([])
-  const [animals, setAnimals] = useState<Array<Animal>>([])
-  const [addModal, setAddModal] = useState<boolean>(true)
+  const [addModal, setAddModal] = useState<boolean>(false)
+  const [redactAnimal, setRedactAnimal] = useState<Animal | undefined>(undefined)
+  const [updateParam, setUpdateParam] = useState<string>(Math.random().toString())
 
   useEffect(() => {
     getFirebaseData()
@@ -31,49 +34,59 @@ const Main = (props: MainProps) => {
 
   const getAnimalTypes = async (): Promise<any> => {
     const animalTypes = await firebaseService.getAnimalTypes(props.app.firebaseApp)
-    setAnimalTypes(animalTypes)
+    props.setAnimalTypes(animalTypes)
   }
 
   const getAnimals = async (): Promise<any> => {
     const animals = await firebaseService.getAnimals(props.app.firebaseApp)
-    setAnimals(animals)
+    props.setAnimals(animals)
   }
 
   const getFirebaseData = async (): Promise<any> => {
     await getAnimalTypes()
     await getAnimals()
-    setLoading(true)
+    setLoading(false)
   }
 
-  const onAddClick = (): void => {
-    console.log('onAddClick')
-  }
-
-  const emptyAnimal: Animal = {
-    id: '',
-    age: 0,
-    color: '',
-    name: '',
-    sex: true,
-    type: '',
-    weight: '',
+  const deleteAnimal = async (id: string): Promise<any> => {
+    // console.log(id)
+    const delAnimal = (await firebaseService.delAnimal(props.app.firebaseApp, id)) as Animal
+    if (delAnimal.id) {
+      const animals = props.app.animals.filter((animal) => animal.id !== delAnimal.id)
+      console.log('Удалено животное: ' + JSON.stringify(delAnimal))
+      props.setAnimals(animals)
+    }
   }
 
   return (
     <Container fluid className="Main">
-
-      {addModal && (<ModalWindow title="Зарегистрировать животное" closeHandler={() => setAddModal(false)}>
-        <AnimalForm />
-      </ModalWindow>)}
+      {addModal && (
+        <ModalWindow title="Зарегистрировать животное" closeHandler={() => setAddModal(false)}>
+          <AnimalForm closeHandler={() => setAddModal(false)} />
+        </ModalWindow>
+      )}
 
       <h1>Приют домашних животных:</h1>
       <h3>Животные:</h3>
-      <Row className="Main__Header m-0">
-        {animals.map((animal, index) => {
-          // console.log(animal)
-          return <AnimalCard key={index} animal={animal} cardNumber={index} />
-        })}
-      </Row>
+
+      {props.app.animals[0] ? (
+          <Row id={updateParam} className="Main__Header m-0">
+            {props.app.animals.map((animal, index) => {
+              // console.log(animal)
+              return (
+                <AnimalCard
+                  key={animal.id}
+                  animal={animal}
+                  cardNumber={index}
+                  onDeleteClick={(id: string) => deleteAnimal(id)}
+                />
+              )
+            })}
+          </Row>
+        ) : (
+          <h2 className="text-danger">Не зарегистрировано животных</h2>
+        )}
+
       <Row className="Main__addButton m-0">
         <IconButton
           bgColor="#198754"
@@ -83,15 +96,18 @@ const Main = (props: MainProps) => {
           icon="/icons/delete.svg"
           borderRadius="5px"
           bgIconColor="#146f44"
-          onClickHandler={() => onAddClick()}
+          onClickHandler={() => setAddModal(true)}
         />
       </Row>
-      <p>Типы животных: {JSON.stringify(animalTypes)}</p>
+      {/* <p>Типы животных: {JSON.stringify(props.app.animalTypes)}</p> */}
     </Container>
   )
 }
 
-const mapDispatchToProps = {}
+const mapDispatchToProps = {
+  setAnimals,
+  setAnimalTypes,
+}
 
 const mapStateToProps = (state: RootState) => {
   const app = state.app

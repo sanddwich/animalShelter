@@ -1,4 +1,6 @@
 import {
+  SET_ANIMALS,
+  SET_ANIMAL_TYPES,
   SET_APP_ERROR,
   SET_APP_LOADING,
   SET_APP_MARKETUSER,
@@ -8,6 +10,8 @@ import {
   SET_APP_TARIFF,
 } from '../constants/ActionTypes'
 import Pagination from '../interfaces/AdditionalInterfaces/Pagination'
+import Animal from './AdditionalInterfaces/Animal'
+import AnimalType from './AdditionalInterfaces/AnimalType'
 import Product from './AdditionalInterfaces/Product'
 import ProductCategory from './AdditionalInterfaces/ProductCategory'
 
@@ -46,6 +50,16 @@ interface setAppPagination {
   pagination: Pagination
 }
 
+interface setAnimals {
+  type: typeof SET_ANIMALS
+  animals: Animal[]
+}
+
+interface setAnimalTypes {
+  type: typeof SET_ANIMAL_TYPES
+  animalTypes: AnimalType[]
+}
+
 export type AppActionType =
   | setAppLoading
   | setAppError
@@ -54,3 +68,5 @@ export type AppActionType =
   | setAppProducts
   | setAppPagination
   | setAppProductCategories
+  | setAnimals
+  | setAnimalTypes

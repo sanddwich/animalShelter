@@ -1,4 +1,6 @@
 import {
+  SET_ANIMALS,
+  SET_ANIMAL_TYPES,
   SET_APP_ERROR,
   SET_APP_LOADING,
   SET_APP_MARKETUSER,
@@ -12,7 +14,7 @@ import { AppState } from '../interfaces/interfaces'
 import { Config } from '../../Config/Config'
 
 //Firebase to Redux
-import {initializeApp} from 'firebase/app'
+import { initializeApp } from 'firebase/app'
 
 const initialState: AppState = {
   firebaseApp: initializeApp(Config.firebaseConfig),
@@ -22,6 +24,8 @@ const initialState: AppState = {
   marketUser: null,
   products: [],
   productCategories: [],
+  animals: [],
+  animalTypes: [],
   pagination: {
     paginate: 10,
     lastPage: 1,
@@ -66,6 +70,16 @@ const app = (state: AppState = initialState, action: AppActionType) => {
       return {
         ...state,
         pagination: action.pagination,
+      }
+    case SET_ANIMALS:
+      return {
+        ...state,
+        animals: action.animals,
+      }
+    case SET_ANIMAL_TYPES:
+      return {
+        ...state,
+        animalTypes: action.animalTypes,
       }
     default:
       return state
